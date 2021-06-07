@@ -1,12 +1,16 @@
 package com.sec.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.sec.model.MyUserDetails;
 import com.sec.model.User;
 import com.sec.service.UserService;
 
@@ -20,6 +24,10 @@ public class Controller {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		boolean hasUserRole = authentication.getAuthorities().stream()
 		          .anyMatch(r -> r.getAuthority().equals("ROLE_USER"));
+		
+		
+		         
+	
 		
 		if(hasUserRole==true) {
 			return "Welcome to ROLE USER";

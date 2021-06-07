@@ -11,14 +11,14 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 public class MyUserDetails implements UserDetails{
-	
+	private int id;
 	private String userName;
 	private String password;
 	private boolean ative;
 	private List<GrantedAuthority>authorities;
 
 	public MyUserDetails(User user) {
-		
+		this.id=user.getId();
 		this.userName=user.getUserName();
 		this.password=user.getPassword();
 		this.ative=user.isAtive();
@@ -74,6 +74,11 @@ public boolean isCredentialsNonExpired() {
 public boolean isEnabled() {
 	// TODO Auto-generated method stub
 	return ative;
+}
+
+public int getUserId() {
+	// TODO Auto-generated method stub
+	return id;
 }
 
 	
