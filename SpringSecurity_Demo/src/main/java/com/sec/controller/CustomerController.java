@@ -1,6 +1,9 @@
 package com.sec.controller;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -26,9 +29,11 @@ public class CustomerController {
 	
 	@PostMapping("/add/{userId}/{productId}{}")
 	public ResponseEntity<String> addCustomers(@PathVariable int userId,@PathVariable int productId,Customers customers) {
-		
+		System.out.println(productId);
 		customers.setUser(new User(userId));
-		customers.setProducts(new Products(productId));
+		List<Products>p=new ArrayList<>();
+		p.add(new Products(productId));
+		customers.setProducts(p);
 		customerService.addCustomers(customers);
 		return new ResponseEntity<>("Sucess", HttpStatus.OK);
 	}
@@ -50,7 +55,7 @@ public class CustomerController {
 		
 		try {
 			Customers customers=customerService.getOne(id);
-			customers.setProducts(new Products(productsId));
+			//customers.setProducts(new Products(productsId));
 			customerService.update(customers);
 			 return new ResponseEntity<>(" Sucess", HttpStatus.OK);
 		} catch (Exception e) {

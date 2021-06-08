@@ -38,8 +38,9 @@ public@Data class Customers {
 	private String profession;
 	private String  nic;
 	
-	@ManyToOne
-	private Products products;
+	@ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	@JsonIgnore
+	private List<Products> products;
 	@ManyToOne
 	private User user;
 	
